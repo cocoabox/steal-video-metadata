@@ -105,7 +105,6 @@ stdin.on('end', async function () {
         for (const got of got_files) {
             let thumb_fn;
             if (download_imgs) {
-                console.log('-->',img_href);
                 const img_mat = img_href.replace(/(\?|#).*$/,"").match(/^(.*?)\.([^\.]+)\.([^\.]*)$/);
                 if (img_mat) {
                     const img_url_suf = img_mat[1];

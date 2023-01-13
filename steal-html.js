@@ -25,7 +25,7 @@
                     return {
                         ep: j.stry_sq,
                         title: `${j.strysu_txt} ${j.strytitle_txt}`,
-                        synop: j.outline1_txt,
+                        synop: j.outline1_txt ?? j.outline2_txt,
                         img_href: `${img_dir}/${j.thumnail1file_txt}`,
                     };
                 });
