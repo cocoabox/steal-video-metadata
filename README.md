@@ -1,8 +1,8 @@
-プライムビデオ、dアニメストア、バンダイCHから番組メタデータ（各話あらすじ、サムネ画像）を吸い取ります。Jellyfin用のメタデータNFOファイルを生成します。
+プライムビデオ、dアニメストア、バンダイCHから番組メタデータ（各話あらすじ、サムネ画像）を吸い取ります。個人メディアサーバ[Jellyfin](https://jellyfin.org/)用のメタデータNFOファイルを生成します。
 
-（注：違法ダウンロードや、DVDのリッピングは絶対にやめましょう）
+- 注：違法ダウンロードや、DVDのリッピングは絶対にやめましょう
 
-[<img src="images/0.png" alt="drawing" width="200" />](images/0.png) ▶▶▶ [<img src="images/7.png" alt="drawing" width="200" />](images/7.png)
+BEFORE：[<img src="images/0.png" alt="drawing" width="200" />](images/0.png) ➔ AFTER： [<img src="images/7.png" alt="drawing" width="200" />](images/7.png)
 
 
 ## 事前準備
@@ -47,7 +47,8 @@ shows/番組名　←─── 以下（４）は このディレクトリから
 ## メタデータ吸い取り・更新手順
 
 1. アマプラ、ｄアニメストア、バンダイChの番組ページを開く
-	[<img src="images/1.png" alt="drawing" width="200" />](images/1.png)
+
+	[<img src="images/1.png" alt="drawing" width="200" />](images/1.png) ➔
 	[<img src="images/2.png" alt="drawing" width="200" />](images/2.png)
 	
 1. ブックマークレットを押す
@@ -72,3 +73,5 @@ shows/番組名　←─── 以下（４）は このディレクトリから
 
   	[<img src="images/5.png" alt="drawing" width="200" />](images/5.png)
   	[<img src="images/6.png" alt="drawing" width="200" />](images/6.png)
+
+1. Jelly finのシーズンページをリロードする
