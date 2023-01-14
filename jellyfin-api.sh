@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT_DIR=$( cd -- "$( dirname -- "$(readlink "${BASH_SOURCE[0]}")" )" &> /dev/null && pwd )
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 if [[ -z "$JELLYFIN_API_KEY" ]]; then
     if [[ -f "$SCRIPT_DIR/conf/api-key.txt" ]]; then
@@ -39,7 +39,11 @@ else
     shift
     CONTENT_TYPE=$(echo "$MIME_TYPE" | tr -d "\n\r")
     if [[ "$CONTENT_TYPE" =~ "image/" ]]; then
-        BODY=$(cat "$FILE_NAME" | base64 | tr -d "\n\r") 
+        if [[ `uname` == "Linux" ]]; then
+            BODY=$(cat "$FILE_NAME" | base64 -w0 | tr -d "\n\r") 
+        else 
+            BODY=$(cat "$FILE_NAME" | base64 | tr -d "\n\r") 
+        fi
     else 
         BODY=$(cat "$FILE_NAME")
     fi

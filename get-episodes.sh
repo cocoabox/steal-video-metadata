@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT_DIR=$( cd -- "$( dirname -- "$(readlink "${BASH_SOURCE[0]}")" )" &> /dev/null && pwd )
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 SHOW_ID="$1"
 SEASON_ID="$2"
 if [[ -z "$SEASON_ID" || -z "$SHOW_ID" ]]; then

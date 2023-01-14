@@ -1,6 +1,5 @@
 #!/bin/bash
-SCRIPT_DIR=$( cd -- "$( dirname -- "$(readlink "${BASH_SOURCE[0]}")" )" &> /dev/null && pwd )
-
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ITEM_ID="$1"
 EP="$2"
 TITLE="$3"
@@ -58,7 +57,6 @@ echo "$JSON" > "$TEMP_DIR/body.json"
 STATUS_CODE=$("$SCRIPT_DIR"/jellyfin-api.sh POST "Items/$ITEM_ID"  "$TEMP_DIR/body.json"    "application/json")
 
 if [[ "$STATUS_CODE" == 204 ]]; then
-    echo "OK"
     RES=0
 else 
     echo "Failed : $STATUS_CODE" >&2
