@@ -7,6 +7,12 @@ BEFORE：[<img src="images/0.png" alt="drawing" width="200" />](images/0.png) �
 
 ## 事前準備
 
+1. 環境整備
+
+    - linux またはmacOS (windowsの場合はbash）
+    - [nodeJS](https://nodejs.org/) > 14
+    - (任意) [jellyfin](https://jellyfin.org/)
+    
 1. git clone
 
 	```
