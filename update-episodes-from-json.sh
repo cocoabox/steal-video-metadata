@@ -31,6 +31,12 @@ if [[ -z "$SEASON_ID" ]]; then
     exit 1
 fi
 
+# シーズンのあらすじ
+
+"$SCRIPT_DIR"/update-season-synop.sh "$SEASON_ID" "$(cat "$JSON_PATH" | jq -r '.series_synop')"
+
+# 各話のあらすじ
+
 cat "$JSON_PATH"  | jq -r '.episodes | .[] | (.ep|tostring) ' | while read EP; do
 
     EP_ID="$("$SCRIPT_DIR"/get-episodes.sh  $SHOW_ID  $SEASON_ID $EP)"
