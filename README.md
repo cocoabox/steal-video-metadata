@@ -19,6 +19,7 @@ BEFORE：[<img src="images/0.png" alt="drawing" width="200" />](images/0.png) �
 	```
 	npm i
 	ln -s  $PWD/create-nfo.js  /usr/local/bin/create-nfo
+	ln -s  $PWD/update-episodes-from-json.sh  /usr/local/bin/update-jellyfin-ep
 	```
 
 2. ブックマークレットを作成する
@@ -26,6 +27,14 @@ BEFORE：[<img src="images/0.png" alt="drawing" width="200" />](images/0.png) �
     - アドレス: `javascript:(steal-html.min.jsの中身)`
 
 	[<img src="images/bookmarklet.png" alt="drawing" width="200" />](images/bookmarklet.png)
+	
+3. （任意）Jellyfinサーバのアドレスや、API KEY設定を行う。`steal-video-metadata/conf/*.txt` を作成する。 API KEYは：`http://JELLYFIN_HOST:8096/web/index.html#!/apikeys.html` から生成できます。
+	
+	```
+	mkdir conf
+	echo "http://JELLYFIN_HOST:8096" > conf/host.txt
+	echo "JELLYFIN_API_KEY" > conf/api-key.txt
+	```	
 
 ## ディレクトリ構造
 
@@ -44,7 +53,7 @@ shows/番組名　←─── 以下（４）は このディレクトリから
 ```
 　
 
-## メタデータ吸い取り・更新手順
+## メタデータ吸い取り手順
 
 1. アマプラ、ｄアニメストア、バンダイChの番組ページを開く
 
@@ -57,8 +66,11 @@ shows/番組名　←─── 以下（４）は このディレクトリから
 
 	[<img src="images/3.png" alt="drawing" width="200" />](images/3.png)
 
+## Jellyfin メタデータ更新手順
 
-1. 番組ディレクトリから
+### .nfo, .jpg ファイルを番組ディレクトリで作成したい場合
+
+1.番組ディレクトリから
 
     ```
     cat 番組.json | create-nfo 1 imgs
@@ -75,3 +87,19 @@ shows/番組名　←─── 以下（４）は このディレクトリから
   	[<img src="images/6.png" alt="drawing" width="200" />](images/6.png)
 
 1. Jelly finのシーズンページをリロードする
+
+### .nfo, .jpg ファイルを作成せず、直接Jellyfinサーバのデータベースを更新した場合
+
+1. 事前準備の (4) を済ませる
+
+1. メタデータJSONファイルを用意する（上記《メタデータ吸い取り手順》の (1) 〜 (3)
+
+1. Jellyfinの番組ページ（シーズン1,2,3が並んでるページ）を開き、アドレスバーからShowId をコピーする
+
+	[<img src="images/show-id.png" alt="drawing" width="200" />](images/show-id.png)
+	
+1. コマンドラインを叩く（シーズン１の場合）。以下SHOW_IDは適宜なShowId文字列に入れ替える。
+
+	```
+	cat 番組.json | update-jellyfin-ep SHOW_ID    1     
+	```
