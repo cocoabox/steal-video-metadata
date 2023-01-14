@@ -12,15 +12,24 @@
         {
             domain: 'www.b-ch.com',
             func: async () => {
-
-                const title = window.location.href.match(/\/titles\/(.*?)\/?$/)?.[1];
+                console.log("** b-ch **");
+                const title = window.location.href.match(/\/titles\/([0-9]+)?/)?.[1];
                 if (! title) {
                     alert('cannot get title from URL ; not bandai ch page ??');
                     return;
                 }
                 const img_dir = `https://image2.b-ch.com/ttl2/${title}/`
-                const json = await jQuery.getJSON(`https://www.b-ch.com/json/titles/${title}.json`);
-                console.log(json);
+                const json_url = `https://www.b-ch.com/json/titles/${title}.json`;
+                console.log({json_url, img_dir});
+                let json;
+                try {
+                    json = await jQuery.getJSON(json_url);
+                }
+                catch (e) {
+                    console.warn("failed to get json because :", e);
+                    return false;
+                }
+                console.log('fetched :', json);
                 const episodes = json.map(j => {
                     return {
                         ep: j.stry_sq,
