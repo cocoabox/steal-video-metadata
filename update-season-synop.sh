@@ -11,8 +11,8 @@ USER_ID=$( "$SCRIPT_DIR"/jellyfin-api.sh GET Users | jq -r '.[0].Id' )
 CURRENT_JSON=$( "$SCRIPT_DIR"/jellyfin-api.sh GET Users/$USER_ID/Items/$ITEM_ID )
 JQ_SYN='. | {
     Overview: '$(echo "$SYNOP" | tr -d '\r\n' | jq --raw-input --slurp .)',
-
-    DateCreated: .DateCreated, Genres:.Genres, Id:.Id, IndexNumber:.IndexNumber, LockData:.LockData, 
+    LockData:true,
+    DateCreated: .DateCreated, Genres:.Genres, Id:.Id, IndexNumber:.IndexNumber,
     LockedFields:.LockedFields, Name:.Name, People:.People, PremiereDate:.PremiereDate,
     ProductionYear:.ProductionYear, ProviderIds:.ProviderIds, Studios:.Studios, Taglines:.Taglines, Tags:.Tags,
 

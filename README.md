@@ -11,6 +11,7 @@ BEFORE：[<img src="images/0.png" alt="drawing" width="200" />](images/0.png) �
 
     - linux またはmacOS (windowsの場合はbash）
     - [nodeJS](https://nodejs.org/) > 14
+    - jq ≥ 1.6
     - (任意) [jellyfin](https://jellyfin.org/)
     
 1. git clone
@@ -45,7 +46,7 @@ BEFORE：[<img src="images/0.png" alt="drawing" width="200" />](images/0.png) �
 ## ディレクトリ構造
 
 ```
-shows/番組名　←─── 以下（４）は このディレクトリから実行します
+shows/番組名　←─── 以下（★）は このディレクトリから実行します
 ├── season 1
 │   ├── 番組名 01.mp4
 │   ├── 番組名 02.mp4 
@@ -76,16 +77,16 @@ shows/番組名　←─── 以下（４）は このディレクトリから
 
 ### .nfo, .jpg ファイルを番組ディレクトリで作成したい場合
 
-1.番組ディレクトリから
+1.★番組ディレクトリから
 
-    ```
-    cat 番組.json | create-nfo 1 imgs
-    ```
-
-    - season 1 以外の場合、`create-nfo [SEASON番号]`
-    - サムネをダウンロードしない場合、第２引数の`imgs`は省略
+  ```
+  cat 番組.json | create-nfo 1 imgs
+  ```
+    
+  - season 1 以外の場合、`create-nfo [SEASON番号]`
+  - サムネをダウンロードしない場合、第２引数の`imgs`は省略
       
-  	[<img src="images/4.png" alt="drawing" width="200" />](images/4.png)
+  [<img src="images/4.png" alt="drawing" width="200" />](images/4.png)
 
 1. Jellyfin Web 画面から番組のシーズンページを開き、「⟳リフレッシュメタデータ」を押す。「新しいファイルとアップデートされたファイルをスキャン」を選び、【リフレッシュ】ボタンを押す。
 

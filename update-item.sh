@@ -42,7 +42,7 @@ echo "{\
   \"OfficialRating\": \"\",
   \"CustomRating\": \"\",
   \"People\": [],
-  \"LockData\": false,
+  \"LockData\": true,
   \"LockedFields\": [],
   \"ProviderIds\": { },
   \"PreferredMetadataLanguage\": \"\",
