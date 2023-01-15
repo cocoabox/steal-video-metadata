@@ -37,9 +37,34 @@ fi
 
 # 各話のあらすじ
 
+find_ep() {
+    local WANT_EP="$1"
+    "$SCRIPT_DIR"/get-episodes.sh  $SHOW_ID  $SEASON_ID | while read LINE; do
+        EP_ID=$( echo "$LINE" | awk 'BEGIN { FS="\t" } { print $3 }' )
+        DB_EP=$( echo "$LINE" | awk 'BEGIN { FS="\t" } { print $1 }' )
+        if [[ "$DB_EP" == "null" ]]; then
+            FN=$( echo "$LINE" | awk 'BEGIN { FS="\t" } { print $4 }' )
+            GUESS_EP=$( node "$SCRIPT_DIR/guess-episode" "$FN" | jq .ep)
+            if [[ "$GUESS_EP" != "null" && "$GUESS_EP" == "$WANT_EP" ]]; then
+                echo "--> found : $FN ($EP_ID)" >&2
+                echo "$EP_ID"
+                break
+            fi 
+        fi
+    done
+}
+
 cat "$JSON_PATH"  | jq -r '.episodes | .[] | (.ep|tostring) ' | while read EP; do
 
     EP_ID="$("$SCRIPT_DIR"/get-episodes.sh  $SHOW_ID  $SEASON_ID $EP)"
+    if [[ -z "$EP_ID" ]]; then
+        echo "`tput setaf 6`trying to guess which file is: episode ${EP} of season ${SEASON} of show ${SHOW_ID}`tput sgr0`" >&2
+        EP_ID=$(find_ep $EP)
+        if [[ -z "$EP_ID" ]]; then
+            echo "`tput setaf 1`failed to get: episode ${EP} of season ${SEASON} of show ${SHOW_ID}`tput sgr0`" >&2
+            exit 1
+        fi
+    fi
     TITLE="$( cat "$JSON_PATH" | jq -r '.episodes | .[] | select(.ep=='$EP') | .title')"
     echo "`tput setaf 10`### $EP : $TITLE`tput sgr0`"  >&2
     OVERVIEW="$(  cat "$JSON_PATH" | jq -r '.episodes | .[] | select(.ep=='$EP') | .synop' )"

@@ -12,6 +12,7 @@ fi
 JSON=$(
 echo "{\
   \"IndexNumber\": $(echo "$EP" | tr -d '\r\n' | jq --raw-input --slurp .) , 
+  \"DisplayOrder\":$(echo "$EP" | tr -d '\r\n' | jq --raw-input --slurp .) , 
   \"Name\":        $(echo "$TITLE" | tr -d '\r\n' | jq --raw-input --slurp .) , 
   \"Overview\":    $(echo "$SYNOP" | tr -d '\r\n' | jq --raw-input --slurp .) , 
   \"Id\":          \"${ITEM_ID}\" , 
@@ -24,7 +25,6 @@ echo "{\
   \"AirsAfterSeasonNumber\": \"\",
   \"AirsBeforeEpisodeNumber\": \"\",
   \"ParentIndexNumber\": null,
-  \"DisplayOrder\": \"\",
   \"Album\": \"\",
   \"AlbumArtists\": [],
   \"ArtistItems\": [],
