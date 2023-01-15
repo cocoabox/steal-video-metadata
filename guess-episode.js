@@ -22,12 +22,12 @@ function extract_season_episode(input) {
     let ep;
     const season_mat = nom.match(/season\s*([0-9]+)/i);
     if (season_mat) {
-        season = parse(season_mat[1]);
+        season = parseInt(season_mat[1]);
         nom = nom.replaceAll(/season\s*([0-9]+)/gi, '');
     }
     const ep_mat = nom.match(/(ep|episode)\s*([0-9]+)/i);
     if (ep_mat) {
-        ep = parse(season_mat[2]);
+        ep = parseInt(ep_mat[2]);
         nom = nom.replaceAll(/(ep|episode)\s*([0-9]+)/gi, '');
     }
     if (ep) {
