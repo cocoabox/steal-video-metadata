@@ -57,7 +57,7 @@ find_ep() {
 cat "$JSON_PATH"  | jq -r '.episodes | .[] | (.ep|tostring) ' | while read EP; do
 
     EP_ID="$("$SCRIPT_DIR"/get-episodes.sh  $SHOW_ID  $SEASON_ID $EP)"
-    if [[ -z "$EP_ID" ]]; then
+    if [[ "$GUESS" == 1 || -z "$EP_ID" ]]; then
         echo "`tput setaf 6`trying to guess which file is: episode ${EP} of season ${SEASON} of show ${SHOW_ID}`tput sgr0`" >&2
         EP_ID=$(find_ep $EP)
         if [[ -z "$EP_ID" ]]; then
