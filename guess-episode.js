@@ -35,7 +35,7 @@ function extract_season_episode(input) {
     }
     const mat = nom.match(/(S([0-9]+))?E([0-9]+)/i);
     if (mat) {
-        return {season: parseInt(mat[2]), ep: parseInt(mat[1])};
+        return {season: parseInt(mat[2]), ep: parseInt(mat[3])};
     }
     const mat1 = nom.match(/([0-9]+)話/);
     if (mat1) {
